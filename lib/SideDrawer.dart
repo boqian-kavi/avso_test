@@ -5,10 +5,22 @@ class SideDrawer extends StatefulWidget {
   _SideDrawerState createState() => _SideDrawerState();
 }
 
+var _listViewData = [
+  {"text": "Dashboard", "icon": Icons.dashboard},
+  {"text": "Requests", "icon": Icons.build},
+  {"text": "Messages", "icon": Icons.mail_outline},
+  {"text": "Car Tracing", "icon": Icons.location_on},
+  {"text": "Shop Info", "icon": Icons.storefront},
+  {"text": "Settings", "icon": Icons.settings},
+];
+
 class _SideDrawerState extends State<SideDrawer> {
+  int _currentSelected = 0;
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 250,
       child: Drawer(
         child: MediaQuery.removePadding(
           context: context,
@@ -17,19 +29,35 @@ class _SideDrawerState extends State<SideDrawer> {
             color: Color(0xff213F99),
             child: Padding(
               padding: const EdgeInsets.only(
-                left: 25.0,
-                right: 25.0,
                 top: 60.0,
               ),
-              child: ListView(
-                children: <Widget>[
-                  MenuListItem(Icons.settings, 'Dashboard'),
-                  MenuListItem(Icons.settings, 'Requests'),
-                  MenuListItem(Icons.settings, 'Messages'),
-                  MenuListItem(Icons.settings, 'Car Tracing'),
-                  MenuListItem(Icons.settings, 'Shop Info'),
-                  MenuListItem(Icons.settings, 'Settings'),
-                ],
+              child: ListView.builder(
+                itemCount: _listViewData.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: EdgeInsets.only(bottom: 20),
+                    color: _currentSelected == index
+                        ? Color(0xff127CB6)
+                        : Color(0xff213F99),
+                    child: ListTile(
+                      minLeadingWidth: 16,
+                      contentPadding: EdgeInsets.symmetric(horizontal: 25),
+                      leading: Icon(
+                        _listViewData[index]['icon'],
+                        color: Colors.white,
+                      ),
+                      title: Text(
+                        "${_listViewData[index]['text']}",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      onTap: () {
+                        setState(() {
+                          _currentSelected = index;
+                        });
+                      },
+                    ),
+                  );
+                },
               ),
             ),
           ),
@@ -39,31 +67,31 @@ class _SideDrawerState extends State<SideDrawer> {
   }
 }
 
-class MenuListItem extends StatelessWidget {
-  final IconData iconData;
-  final String title;
+// class MenuListItem extends StatelessWidget {
+//   final IconData iconData;
+//   final String title;
 
-  MenuListItem(
-    this.iconData,
-    this.title,
-  );
+//   MenuListItem(
+//     this.iconData,
+//     this.title,
+//   );
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 20),
-      child: ListTile(
-        leading: Icon(
-          iconData,
-          color: Colors.white,
-        ),
-        title: Text(
-          title,
-          style: TextStyle(color: Colors.white, fontSize: 24),
-        ),
-        minLeadingWidth: 16,
-        onTap: () {},
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       margin: EdgeInsets.only(bottom: 20),
+//       child: ListTile(
+//         leading: Icon(
+//           iconData,
+//           color: Colors.white,
+//         ),
+//         title: Text(
+//           title,
+//           style: TextStyle(color: Colors.white, fontSize: 24),
+//         ),
+//         minLeadingWidth: 16,
+//         onTap: () {},
+//       ),
+//     );
+//   }
+// }
