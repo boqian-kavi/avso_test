@@ -35,6 +35,8 @@ dependencies:
   flutter_redux: ^0.8.2
   redux: ^5.0.0
   csv: ^5.0.0
+  reorderables: ^0.4.1
+  dotted_border: ^2.0.0
 
 dev_dependencies:
   flutter_test:

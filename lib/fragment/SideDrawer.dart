@@ -25,13 +25,13 @@ class _SideDrawerState extends State<SideDrawer> {
       converter: (store) => store.state,
       builder: (context, state) {
         return SizedBox(
-          width: 250,
+          width: 260,
           child: Drawer(
             child: Container(
               color: Color(0xff213F99),
               child: Padding(
                 padding: const EdgeInsets.only(
-                  top: 55.0,
+                  top: 80,
                 ),
                 child: ListView.builder(
                   itemCount: _listViewData.length,
