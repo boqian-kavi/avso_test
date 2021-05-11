@@ -38,7 +38,7 @@ class _RequestPageState extends State<RequestPage> {
                           padding: EdgeInsets.symmetric(
                               vertical: 20, horizontal: 30),
                           decoration: BoxDecoration(
-                            color: Color(0xffF6F6F6),
+                            color: Colors.white,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +52,7 @@ class _RequestPageState extends State<RequestPage> {
                                 ),
                               ),
                               SizedBox(
-                                height: 30,
+                                height: 20,
                               ),
                               Expanded(
                                 flex: 1,

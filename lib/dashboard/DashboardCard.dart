@@ -37,7 +37,7 @@ class _DashboardCardState extends State<DashboardCard> {
                 color: Color(0xff000000).withOpacity(0.2),
                 spreadRadius: 2,
                 blurRadius: 5,
-                offset: Offset(2, 5),
+                offset: Offset(3, 5),
               ),
             ],
           ),

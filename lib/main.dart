@@ -18,7 +18,7 @@ void main() {
         ..width = '200'
         ..height = '200'
         ..src =
-            'https://app.powerbi.com/reportEmbed?reportId=ed3c5d66-4e81-40c5-9633-842158d51d42&autoAuth=true&ctid=bf2665d9-7e6b-49ab-93a5-4b7262a44452&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLW5vcnRoLWNlbnRyYWwtcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQvIn0%3D'
+            'https://app.powerbi.com/view?r=eyJrIjoiNDM0MmM4YzctNDQzMS00YTc3LWFhZTMtZWJiZWI4MDA4MzZjIiwidCI6ImJmMjY2NWQ5LTdlNmItNDlhYi05M2E1LTRiNzI2MmE0NDQ1MiIsImMiOjN9'
         ..style.border = 'none');
   ui.platformViewRegistry.registerViewFactory(
       'powerbi2-html',
@@ -26,7 +26,7 @@ void main() {
         ..width = '200'
         ..height = '200'
         ..src =
-            'https://app.powerbi.com/reportEmbed?reportId=29dbbbc0-1aed-44d9-88d1-4515df5a397d&autoAuth=true&ctid=bf2665d9-7e6b-49ab-93a5-4b7262a44452&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLW5vcnRoLWNlbnRyYWwtcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQvIn0%3D'
+            'https://app.powerbi.com/view?r=eyJrIjoiYTg1ZTk4MjgtMTczZS00MGNhLWEyM2QtNmJiN2VmYjNjNDdjIiwidCI6ImJmMjY2NWQ5LTdlNmItNDlhYi05M2E1LTRiNzI2MmE0NDQ1MiIsImMiOjN9'
         ..style.border = 'none');
   final _initalState = AppState(sideDrawerIndex: 0, selectedRequests: []);
 

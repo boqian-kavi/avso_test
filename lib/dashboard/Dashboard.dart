@@ -41,7 +41,7 @@ class _DashboardState extends State<Dashboard> {
         isPowerBi: true,
         viewType: 'powerbi2-html',
       ),
-      AddMetricsCard()
+      // AddMetricsCard()
     ];
   }
 
@@ -90,6 +90,7 @@ class _DashboardState extends State<Dashboard> {
             TopHeader(),
             Expanded(
               child: Container(
+                color: Colors.white,
                 padding: EdgeInsets.symmetric(
                   vertical: 30,
                   horizontal: 40,
@@ -106,7 +107,7 @@ class _DashboardState extends State<Dashboard> {
                           )),
                     ),
                     SizedBox(
-                      height: 50,
+                      height: 30,
                     ),
                     Align(
                       alignment: Alignment.centerRight,
@@ -161,7 +162,6 @@ class AddMetricsCard extends StatelessWidget {
           child: SizedBox(
             height: 160,
             child: Stack(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Align(
                   alignment: Alignment.topLeft,
