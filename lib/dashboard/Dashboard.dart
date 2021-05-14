@@ -1,5 +1,5 @@
 import 'package:avso_test/dashboard/DashboardCard.dart';
-import 'package:avso_test/fragment/SideDrawer.dart';
+import 'package:avso_test/fragment/SideBar.dart';
 import 'package:avso_test/fragment/TopHeader.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +87,7 @@ class _DashboardState extends State<Dashboard> {
 
     return Scaffold(
       body: Row(children: [
-        SideDrawer(),
+        SideBar(),
         Expanded(
           flex: 1,
           child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [

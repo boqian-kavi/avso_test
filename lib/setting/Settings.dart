@@ -1,4 +1,4 @@
-import 'package:avso_test/fragment/SideDrawer.dart';
+import 'package:avso_test/fragment/SideBar.dart';
 import 'package:avso_test/fragment/TopHeader.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class _SettingsState extends State<Settings> {
     return Scaffold(
       body: Row(
         children: [
-          SideDrawer(),
+          SideBar(),
           Expanded(
             flex: 1,
             child: Column(

@@ -2,7 +2,7 @@ import 'package:avso_test/cartracing/CarTracing.dart';
 import 'package:avso_test/dashboard/Dashboard.dart';
 import 'package:avso_test/model/chart.dart';
 import 'package:avso_test/request/RequestPage.dart';
-import 'package:avso_test/fragment/SideDrawer.dart';
+import 'package:avso_test/fragment/SideBar.dart';
 import 'package:avso_test/redux/reducers.dart';
 import 'package:avso_test/setting/Settings.dart';
 import 'package:avso_test/shop/ShopInfo.dart';
@@ -62,6 +62,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: "Georgia",
           primarySwatch: Colors.blue,
+          backgroundColor: Colors.white,
         ),
         initialRoute: "/",
         routes: {
@@ -91,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Row(
         children: [
-          SideDrawer(),
+          SideBar(),
           Center(child: Text('Dashboard page')),
         ],
       ),

@@ -3,7 +3,7 @@ import 'package:avso_test/model/exportcsv.dart';
 import 'package:avso_test/redux/app_state.dart';
 import 'package:avso_test/request/AllRequests.dart';
 import 'package:avso_test/request/RecentRequest.dart';
-import 'package:avso_test/fragment/SideDrawer.dart';
+import 'package:avso_test/fragment/SideBar.dart';
 import 'package:avso_test/request/SearchBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -22,7 +22,7 @@ class _RequestPageState extends State<RequestPage> {
         return Scaffold(
           body: Row(
             children: [
-              SideDrawer(),
+              SideBar(),
               Expanded(
                 flex: 1,
                 child: Column(
