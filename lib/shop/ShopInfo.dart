@@ -7,6 +7,7 @@ import 'package:avso_test/shop/LocationType.dart';
 import 'package:avso_test/shop/ShopCapacity.dart';
 import 'package:avso_test/shop/ShopLocationSearchBar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
 class ShopInfo extends StatefulWidget {
@@ -110,9 +111,9 @@ class _ShopInfoState extends State<ShopInfo> {
                     heightFactor: 1,
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 50),
                       decoration: BoxDecoration(
-                        color: Color(0xffF6F6F6),
+                        color: Colors.white,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,12 +122,12 @@ class _ShopInfoState extends State<ShopInfo> {
                             'Shop Information',
                             style: TextStyle(
                               letterSpacing: 0.0,
-                              fontSize: 32,
+                              fontSize: 40,
                               color: Color(0xff213F99),
                             ),
                           ),
                           SizedBox(
-                            height: 20,
+                            height: 40,
                           ),
                           Expanded(
                             flex: 1,
@@ -136,6 +137,18 @@ class _ShopInfoState extends State<ShopInfo> {
                               padding: EdgeInsets.all(20),
                               decoration: BoxDecoration(
                                 color: Colors.white,
+                                border: Border.all(
+                                  color: Color(0xffBDBDBD),
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: Offset(0, 3),
+                                  ),
+                                ],
                               ),
                               child: Row(
                                 children: [
@@ -148,21 +161,24 @@ class _ShopInfoState extends State<ShopInfo> {
                                         ShopLocationSearchBar(),
                                         SizedBox(height: 16),
                                         Expanded(
-                                            child: ListView.builder(
-                                          itemCount: _locations.length,
-                                          itemBuilder: (context, index) {
-                                            return LocationListItem(
-                                              color: _locations[index]["color"],
-                                              prefix: _locations[index]
-                                                  ["prefix"],
-                                              location: _locations[index]
-                                                  ["location"],
-                                              listIndex: index,
-                                              isSelected: activeIndex == index,
-                                              onPress: _setActiveCity,
-                                            );
-                                          },
-                                        ))
+                                          child: ListView.builder(
+                                            itemCount: _locations.length,
+                                            itemBuilder: (context, index) {
+                                              return LocationListItem(
+                                                color: _locations[index]
+                                                    ["color"],
+                                                prefix: _locations[index]
+                                                    ["prefix"],
+                                                location: _locations[index]
+                                                    ["location"],
+                                                listIndex: index,
+                                                isSelected:
+                                                    activeIndex == index,
+                                                onPress: _setActiveCity,
+                                              );
+                                            },
+                                          ),
+                                        )
                                       ],
                                     ),
                                   ),
@@ -188,14 +204,17 @@ class _ShopInfoState extends State<ShopInfo> {
                                                     height: 48,
                                                     width: 48,
                                                     decoration: BoxDecoration(
-                                                      color: Color(0xffF0E380),
+                                                      color: Color(_locations[
+                                                              activeIndex]
+                                                          ["color"]),
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               5),
                                                     ),
                                                     child: Center(
                                                       child: Text(
-                                                        'U',
+                                                        _locations[activeIndex]
+                                                            ["prefix"],
                                                         style: TextStyle(
                                                           color:
                                                               Color(0xff1D1D1D),
@@ -209,7 +228,8 @@ class _ShopInfoState extends State<ShopInfo> {
                                                   Expanded(
                                                     flex: 1,
                                                     child: Text(
-                                                      'Marion, OH',
+                                                      _locations[activeIndex]
+                                                          ["location"],
                                                       textAlign:
                                                           TextAlign.center,
                                                       style: TextStyle(
@@ -221,21 +241,25 @@ class _ShopInfoState extends State<ShopInfo> {
                                                       ),
                                                     ),
                                                   ),
-                                                  FlutterSwitch(
-                                                      activeColor:
-                                                          Color(0xff00AA00),
-                                                      width: 74.0,
-                                                      height: 40.0,
-                                                      valueFontSize: 25.0,
-                                                      toggleSize: 30.0,
-                                                      borderRadius: 30.0,
-                                                      padding: 4.0,
-                                                      value: status,
-                                                      onToggle: (val) {
-                                                        setState(() {
-                                                          status = val;
-                                                        });
-                                                      })
+                                                  MouseRegion(
+                                                    cursor: SystemMouseCursors
+                                                        .click,
+                                                    child: FlutterSwitch(
+                                                        activeColor:
+                                                            Color(0xff00AA00),
+                                                        width: 74.0,
+                                                        height: 40.0,
+                                                        valueFontSize: 25.0,
+                                                        toggleSize: 30.0,
+                                                        borderRadius: 30.0,
+                                                        padding: 4.0,
+                                                        value: status,
+                                                        onToggle: (val) {
+                                                          setState(() {
+                                                            status = val;
+                                                          });
+                                                        }),
+                                                  )
                                                 ],
                                               ),
                                               SizedBox(height: 16),

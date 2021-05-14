@@ -13,9 +13,9 @@ var _listViewData = [
   {"text": "Dashboard", "icon": Icons.dashboard, 'route': '/'},
   {"text": "Requests", "icon": Icons.build, 'route': '/requests'},
   {"text": "Messages", "icon": Icons.mail_outline, 'route': '/requests'},
-  {"text": "Car Tracing", "icon": Icons.location_on, 'route': '/requests'},
+  {"text": "Car Tracing", "icon": Icons.location_on, 'route': '/cartracing'},
   {"text": "Shop Info", "icon": Icons.storefront, 'route': '/shopdetail'},
-  {"text": "Settings", "icon": Icons.settings, 'route': '/requests'},
+  {"text": "Settings", "icon": Icons.settings, 'route': '/settings'},
 ];
 
 class _SideDrawerState extends State<SideDrawer> {

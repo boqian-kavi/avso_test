@@ -4,14 +4,16 @@ import 'package:url_launcher/url_launcher.dart';
 class DashboardCard extends StatefulWidget {
   final String title;
   final String content;
-  final bool isPowerBi;
+  final bool isChart;
   final String viewType;
+  final String viewSrc;
 
   DashboardCard({
     @required this.title,
     this.content,
-    @required this.isPowerBi,
+    @required this.isChart,
     this.viewType,
+    this.viewSrc,
     Key key,
   }) : super(key: key);
 
@@ -22,9 +24,9 @@ class DashboardCard extends StatefulWidget {
 class _DashboardCardState extends State<DashboardCard> {
   @override
   Widget build(BuildContext context) {
-    if (widget.isPowerBi) {
+    if (widget.isChart) {
       return SizedBox(
-        width: 340,
+        width: 360,
         child: Container(
           padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
@@ -42,15 +44,26 @@ class _DashboardCardState extends State<DashboardCard> {
             ],
           ),
           child: SizedBox(
-            height: 160,
+            height: 220,
             child: Column(
               children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    widget.title,
-                    style: TextStyle(fontSize: 18),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      widget.title,
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    InkWell(
+                      onTap: () => launch(widget.viewSrc),
+                      child: Container(
+                        child: Icon(
+                          Icons.open_in_new,
+                          size: 22,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 10),
                 Expanded(child: HtmlElementView(viewType: widget.viewType)),
@@ -61,7 +74,7 @@ class _DashboardCardState extends State<DashboardCard> {
       );
     } else {
       return SizedBox(
-        width: 340,
+        width: 360,
         child: Container(
           padding: EdgeInsets.all(20),
           decoration: BoxDecoration(

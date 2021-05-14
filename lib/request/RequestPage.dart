@@ -1,7 +1,7 @@
-import 'package:avso_test/GoogleMap.dart';
 import 'package:avso_test/fragment/TopHeader.dart';
 import 'package:avso_test/model/exportcsv.dart';
 import 'package:avso_test/redux/app_state.dart';
+import 'package:avso_test/request/AllRequests.dart';
 import 'package:avso_test/request/RecentRequest.dart';
 import 'package:avso_test/fragment/SideDrawer.dart';
 import 'package:avso_test/request/SearchBar.dart';
@@ -30,13 +30,12 @@ class _RequestPageState extends State<RequestPage> {
                   children: [
                     TopHeader(),
                     Expanded(
-                      flex: 1,
                       child: FractionallySizedBox(
                         widthFactor: 1,
                         heightFactor: 1,
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 30),
+                              vertical: 20, horizontal: 50),
                           decoration: BoxDecoration(
                             color: Colors.white,
                           ),
@@ -47,23 +46,23 @@ class _RequestPageState extends State<RequestPage> {
                                 'Request',
                                 style: TextStyle(
                                   letterSpacing: 0.0,
-                                  fontSize: 32,
+                                  fontSize: 40,
                                   color: Color(0xff213F99),
                                 ),
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 40,
                               ),
                               Expanded(
                                 flex: 1,
                                 child: Container(
                                   height: double.infinity,
                                   width: double.infinity,
-                                  padding: EdgeInsets.all(20),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                   ),
                                   child: Container(
+                                    padding: EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       border: Border.all(
@@ -166,10 +165,7 @@ class _RequestPageState extends State<RequestPage> {
                                                       child: TabBarView(
                                                         children: [
                                                           RecentRequest(),
-                                                          Container(
-                                                            height: 300,
-                                                            child: GoogleMap(),
-                                                          ),
+                                                          AllRequests(),
                                                         ],
                                                       ),
                                                     ),

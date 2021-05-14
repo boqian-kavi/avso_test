@@ -27,6 +27,7 @@ class _SearchBarState extends State<SearchBar> {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Flexible(
             flex: 3,

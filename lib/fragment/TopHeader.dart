@@ -25,7 +25,7 @@ class TopHeader extends StatelessWidget {
                 child: Row(
                   children: [
                     Container(
-                      width: 300,
+                      width: 350,
                       child: TextField(
                         maxLines: 1,
                         autofocus: false,

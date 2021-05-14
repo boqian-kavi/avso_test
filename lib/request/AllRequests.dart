@@ -5,18 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class RecentRequest extends StatefulWidget {
-  const RecentRequest({
+class AllRequests extends StatefulWidget {
+  const AllRequests({
     Key key,
   }) : super(key: key);
 
   @override
-  _RecentRequestState createState() => _RecentRequestState();
+  _AllRequestsState createState() => _AllRequestsState();
 }
 
-class _RecentRequestState extends State<RecentRequest> {
+class _AllRequestsState extends State<AllRequests> {
+  void initState() {
+    super.initState();
+  }
+
   @override
-  // StoreProvider.of<AppState>(context).dispatch(SelectedRequests([]));
   Widget build(BuildContext context) {
     return StoreConnector<AppState, AppState>(
       onInit: (store) => store.dispatch(SelectedRequests([])),
@@ -126,6 +129,13 @@ var requests = [
       status: 'Pending',
       updated: "Today"),
   Request(
+      id: 1233,
+      carNo: 11003,
+      location: "Dallas, TX",
+      srd: "Aug 1, 2020",
+      status: 'Pending',
+      updated: "Yesterday"),
+  Request(
       id: 1232,
       carNo: 11002,
       location: "Chicago, IL",
@@ -137,6 +147,20 @@ var requests = [
       carNo: 11001,
       location: "Chicago, IL",
       srd: "Aug 1, 2020",
+      status: 'En Route',
+      updated: "Yesterday"),
+  Request(
+      id: 1230,
+      carNo: 11001,
+      location: "Chicago, IL",
+      srd: "Aug 9, 2020",
+      status: 'En Route',
+      updated: "Today"),
+  Request(
+      id: 1228,
+      carNo: 11001,
+      location: "Naperville, IL",
+      srd: "Sep 24, 2020",
       status: 'Pending',
       updated: "Today"),
 ];

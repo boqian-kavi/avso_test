@@ -19,27 +19,31 @@ class _DashboardState extends State<Dashboard> {
       DashboardCard(
         title: 'Yet to be Schduled',
         content: '25',
-        isPowerBi: false,
+        isChart: false,
       ),
       DashboardCard(
         title: 'En Route',
         content: '32',
-        isPowerBi: false,
+        isChart: false,
       ),
       DashboardCard(
         title: 'In Shop',
         content: '15',
-        isPowerBi: false,
+        isChart: false,
       ),
       DashboardCard(
         title: 'Shop Capacity',
-        isPowerBi: true,
+        isChart: true,
         viewType: 'powerbi-html',
+        viewSrc:
+            'https://app.powerbi.com/view?r=eyJrIjoiNDM0MmM4YzctNDQzMS00YTc3LWFhZTMtZWJiZWI4MDA4MzZjIiwidCI6ImJmMjY2NWQ5LTdlNmItNDlhYi05M2E1LTRiNzI2MmE0NDQ1MiIsImMiOjN9',
       ),
       DashboardCard(
         title: 'Program Tracking',
-        isPowerBi: true,
+        isChart: true,
         viewType: 'powerbi2-html',
+        viewSrc:
+            'https://app.powerbi.com/view?r=eyJrIjoiYTg1ZTk4MjgtMTczZS00MGNhLWEyM2QtNmJiN2VmYjNjNDdjIiwidCI6ImJmMjY2NWQ5LTdlNmItNDlhYi05M2E1LTRiNzI2MmE0NDQ1MiIsImMiOjN9',
       ),
       // AddMetricsCard()
     ];
@@ -101,13 +105,13 @@ class _DashboardState extends State<Dashboard> {
                       alignment: Alignment.centerLeft,
                       child: Text('Good Afternoon, Admin',
                           style: TextStyle(
-                            fontSize: 32,
+                            fontSize: 40,
                             fontWeight: FontWeight.w500,
                             color: Color(0xff127CB6),
                           )),
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 40,
                     ),
                     Align(
                       alignment: Alignment.centerRight,
@@ -124,7 +128,7 @@ class _DashboardState extends State<Dashboard> {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                     Expanded(
                       child: SingleChildScrollView(
