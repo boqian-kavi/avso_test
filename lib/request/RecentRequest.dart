@@ -16,7 +16,6 @@ class RecentRequest extends StatefulWidget {
 
 class _RecentRequestState extends State<RecentRequest> {
   @override
-  // StoreProvider.of<AppState>(context).dispatch(SelectedRequests([]));
   Widget build(BuildContext context) {
     return StoreConnector<AppState, AppState>(
       onInit: (store) => store.dispatch(SelectedRequests([])),

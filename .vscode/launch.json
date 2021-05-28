@@ -10,6 +10,17 @@
             "name": "Launch Chrome against localhost",
             "url": "http://localhost:8080",
             "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Flutter (port 7375)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "args": [
+                "--web-port",
+                "7357",
+                "--no-sound-null-safety"
+            ]
         }
     ]
 }

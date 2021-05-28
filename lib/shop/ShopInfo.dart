@@ -6,6 +6,7 @@ import 'package:avso_test/shop/LocationListItem.dart';
 import 'package:avso_test/shop/LocationType.dart';
 import 'package:avso_test/shop/ShopCapacity.dart';
 import 'package:avso_test/shop/ShopLocationSearchBar.dart';
+import 'package:avso_test/widgets/ResponsiveWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -100,18 +101,18 @@ class _ShopInfoState extends State<ShopInfo> {
           SideBar(),
           Expanded(
             flex: 1,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: Stack(
               children: [
-                TopHeader(),
                 Expanded(
                   flex: 1,
                   child: FractionallySizedBox(
                     widthFactor: 1,
                     heightFactor: 1,
                     child: Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+                      margin: EdgeInsets.only(top: 90),
+                      padding: ResponsiveWidget.isLargeScreen(context)
+                          ? EdgeInsets.symmetric(vertical: 20, horizontal: 50)
+                          : EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: Colors.white,
                       ),
@@ -323,7 +324,8 @@ class _ShopInfoState extends State<ShopInfo> {
                       ),
                     ),
                   ),
-                )
+                ),
+                TopHeader(),
               ],
             ),
           ),

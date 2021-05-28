@@ -1,4 +1,5 @@
 import 'package:avso_test/redux/app_state.dart';
+import 'package:avso_test/widgets/ResponsiveWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'dart:math' as math;
@@ -9,40 +10,36 @@ class SideBar extends StatefulWidget {
   _SideBarState createState() => _SideBarState();
 }
 
-var _listViewData = [
-  {"text": "Dashboard", "icon": Icons.dashboard_outlined, 'route': '/'},
-  {"text": "Requests", "icon": Icons.build_outlined, 'route': '/requests'},
-  {"text": "Messages", "icon": Icons.mail_outline, 'route': '/requests'},
-  {
-    "text": "Car Tracing",
-    "icon": Icons.location_on_outlined,
-    'route': '/cartracing'
-  },
-  {
-    "text": "Shop Info",
-    "icon": Icons.storefront_outlined,
-    'route': '/shopdetail'
-  },
-  {"text": "Settings", "icon": Icons.settings_outlined, 'route': '/settings'},
-];
-
 class _SideBarState extends State<SideBar> {
-  bool isSiderBarOpened = false;
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, AppState>(
       converter: (store) => store.state,
       builder: (context, state) {
-        if (isSiderBarOpened) {
+        var isMobile = ResponsiveWidget.isSmallScreen(context) ||
+            ResponsiveWidget.isXSmallScreen(context);
+
+        if ((!isMobile && state.sideDrawerOpened) ||
+            (isMobile && state.sideDrawerMobileOpened)) {
           return SizedBox(
-            width: 260,
+            width: ResponsiveWidget.isLargeScreen(context)
+                ? 280
+                : isMobile
+                    ? MediaQuery.of(context).size.width
+                    : 260,
             child: Stack(
               children: [
                 Container(
                   color: Colors.white,
                 ),
                 Container(
-                  width: 240,
+                  width: ResponsiveWidget.isLargeScreen(context)
+                      ? 260
+                      : ResponsiveWidget.isXSmallScreen(context)
+                          ? MediaQuery.of(context).size.width - 30
+                          : ResponsiveWidget.isSmallScreen(context)
+                              ? MediaQuery.of(context).size.width * 0.5
+                              : 240,
                   child: Container(
                     color: Color(0xff213F99),
                     child: Padding(
@@ -88,7 +85,16 @@ class _SideBarState extends State<SideBar> {
                 ),
                 Positioned(
                     top: 15,
-                    left: isSiderBarOpened ? 220 : 0,
+                    left: state.sideDrawerOpened
+                        ? ResponsiveWidget.isLargeScreen(context)
+                            ? 240
+                            : ResponsiveWidget.isXSmallScreen(context)
+                                ? MediaQuery.of(context).size.width - 50
+                                : ResponsiveWidget.isSmallScreen(context)
+                                    ? MediaQuery.of(context).size.width * 0.5 -
+                                        20
+                                    : 220
+                        : 0,
                     child: Container(
                       width: 40,
                       decoration: BoxDecoration(
@@ -105,9 +111,14 @@ class _SideBarState extends State<SideBar> {
                           highlightColor: Colors.transparent,
                           iconSize: 28,
                           onPressed: () {
-                            setState(() {
-                              isSiderBarOpened = !isSiderBarOpened;
-                            });
+                            if (isMobile) {
+                              StoreProvider.of<AppState>(context).dispatch(
+                                  DrawerMobileOpened(
+                                      !state.sideDrawerMobileOpened));
+                            } else {
+                              StoreProvider.of<AppState>(context).dispatch(
+                                  DrawerOpened(!state.sideDrawerOpened));
+                            }
                           },
                         ),
                       ),
@@ -133,9 +144,13 @@ class _SideBarState extends State<SideBar> {
                     highlightColor: Colors.transparent,
                     iconSize: 32,
                     onPressed: () {
-                      setState(() {
-                        isSiderBarOpened = !isSiderBarOpened;
-                      });
+                      if (isMobile) {
+                        StoreProvider.of<AppState>(context).dispatch(
+                            DrawerMobileOpened(!state.sideDrawerMobileOpened));
+                      } else {
+                        StoreProvider.of<AppState>(context)
+                            .dispatch(DrawerOpened(!state.sideDrawerOpened));
+                      }
                     },
                   ),
                 ),
@@ -145,7 +160,6 @@ class _SideBarState extends State<SideBar> {
                     widthFactor: 1.0,
                     child: Container(
                       margin: EdgeInsets.only(bottom: 20),
-                      // padding: EdgeInsets.symmetric(horizontal: 0),
                       color: state.sideDrawerIndex == index
                           ? Color(0xff127CB6)
                           : Color(0xff213F99),
@@ -181,3 +195,20 @@ class _SideBarState extends State<SideBar> {
     );
   }
 }
+
+var _listViewData = [
+  {"text": "Dashboard", "icon": Icons.dashboard_outlined, 'route': '/'},
+  {"text": "Requests", "icon": Icons.build_outlined, 'route': '/requests'},
+  {"text": "Messages", "icon": Icons.mail_outline, 'route': '/requests'},
+  {
+    "text": "Car Tracing",
+    "icon": Icons.location_on_outlined,
+    'route': '/cartracing'
+  },
+  {
+    "text": "Shop Info",
+    "icon": Icons.storefront_outlined,
+    'route': '/shopdetail'
+  },
+  {"text": "Settings", "icon": Icons.settings_outlined, 'route': '/settings'},
+];

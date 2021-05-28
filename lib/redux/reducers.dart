@@ -9,8 +9,20 @@ AppState reducer(AppState prevState, dynamic action) {
     newState.sideDrawerIndex = action.payload;
   }
 
+  if (action is DrawerOpened) {
+    newState.sideDrawerOpened = action.payload;
+  }
+
+  if (action is DrawerMobileOpened) {
+    newState.sideDrawerMobileOpened = action.payload;
+  }
+
   if (action is SelectedRequests) {
     newState.selectedRequests = action.payload;
+  }
+
+  if (action is UpdateUser) {
+    newState.userObj = action.payload;
   }
 
   return newState;

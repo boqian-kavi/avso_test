@@ -1,18 +1,22 @@
 import 'package:avso_test/cartracing/CarTracing.dart';
 import 'package:avso_test/dashboard/Dashboard.dart';
+import 'package:avso_test/login/Login.dart';
 import 'package:avso_test/model/chart.dart';
 import 'package:avso_test/request/RequestPage.dart';
-import 'package:avso_test/fragment/SideBar.dart';
 import 'package:avso_test/redux/reducers.dart';
 import 'package:avso_test/setting/Settings.dart';
 import 'package:avso_test/shop/ShopInfo.dart';
+import 'package:avso_test/widgets/auth0_flutter_web/auth0_flutter_web.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'dart:html';
 import 'dart:ui' as ui;
+import 'package:url_strategy/url_strategy.dart';
 
 import 'redux/app_state.dart';
+
+Auth0 auth0;
 
 var chart1 = Chart(
     name: 'powerbi-html',
@@ -24,7 +28,7 @@ var chart2 = Chart(
     src:
         'https://app.powerbi.com/view?r=eyJrIjoiYTg1ZTk4MjgtMTczZS00MGNhLWEyM2QtNmJiN2VmYjNjNDdjIiwidCI6ImJmMjY2NWQ5LTdlNmItNDlhYi05M2E1LTRiNzI2MmE0NDQ1MiIsImMiOjN9');
 
-void main() {
+void main() async {
   ui.platformViewRegistry.registerViewFactory(
       chart1.name,
       (int viewId) => IFrameElement()
@@ -41,22 +45,61 @@ void main() {
         ..allowFullscreen = true
         ..src = chart2.src
         ..style.border = 'none');
-  final _initalState = AppState(sideDrawerIndex: 0, selectedRequests: []);
+  final _initalState = AppState(
+      sideDrawerIndex: 0,
+      selectedRequests: [],
+      sideDrawerOpened: true,
+      sideDrawerMobileOpened: false,
+      userObj: {});
 
   final Store<AppState> _store =
       Store<AppState>(reducer, initialState: _initalState);
 
+  setPathUrlStrategy();
+
+  // auth0 = await createAuth0Client(Auth0ClientOptions(
+  //   domain: 'boqian.us.auth0.com',
+  //   client_id: '9qh0pnSL02NWCkjss24GKhnRLrAsnRaW',
+  // ));
+
   runApp(MyApp(store: _store));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   final Store<AppState> store;
 
   MyApp({this.store});
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool _loggedIn = false;
+  // String _name = "";
+
+  @override
+  void initState() {
+    super.initState();
+    // auth0.isAuthenticated().then(_onAuthenticationChanged);
+  }
+
+  // void _onAuthenticationChanged(bool isAuthenticated) {
+  //   print(isAuthenticated);
+  //   if (!isAuthenticated) {
+  //     setState(() => _loggedIn = false);
+  //   } else {
+  //     auth0.getUser().then((Map<String, dynamic> user) => setState(() {
+  //           _loggedIn = true;
+  //           _name = user["name"];
+  //         }));
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
-      store: store,
+      store: widget.store,
       child: MaterialApp(
         title: 'AVSO',
         theme: ThemeData(
@@ -64,37 +107,15 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           backgroundColor: Colors.white,
         ),
-        initialRoute: "/",
+        initialRoute: _loggedIn ? "/" : "/",
         routes: {
           '/': (context) => Dashboard(),
+          '/login': (context) => Login(auth0),
           '/requests': (context) => RequestPage(),
           '/shopdetail': (context) => ShopInfo(),
           '/cartracing': (context) => CarTracing(),
           '/settings': (context) => Settings(),
         },
-      ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Row(
-        children: [
-          SideBar(),
-          Center(child: Text('Dashboard page')),
-        ],
       ),
     );
   }

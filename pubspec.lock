@@ -15,6 +15,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.5.0"
+  auth0_flutter_web:
+    dependency: "direct main"
+    description:
+      name: auth0_flutter_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1-alpha.20210224"
   boolean_selector:
     dependency: transitive
     description:
@@ -83,6 +90,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_appauth_platform_interface:
+    dependency: "direct main"
+    description:
+      name: flutter_appauth_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
   flutter_redux:
     dependency: "direct main"
     description:
@@ -336,6 +350,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  url_strategy:
+    dependency: "direct main"
+    description:
+      name: url_strategy
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   vector_math:
     dependency: transitive
     description:

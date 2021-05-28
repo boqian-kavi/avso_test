@@ -1,5 +1,6 @@
 import 'package:avso_test/fragment/SideBar.dart';
 import 'package:avso_test/fragment/TopHeader.dart';
+import 'package:avso_test/widgets/ResponsiveWidget.dart';
 import 'package:flutter/material.dart';
 
 class Settings extends StatefulWidget {
@@ -25,8 +26,9 @@ class _SettingsState extends State<Settings> {
                     widthFactor: 1,
                     heightFactor: 1,
                     child: Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+                      padding: ResponsiveWidget.isLargeScreen(context)
+                          ? EdgeInsets.symmetric(vertical: 20, horizontal: 50)
+                          : EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: Colors.white,
                       ),
