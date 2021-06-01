@@ -43,10 +43,9 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   onPressed: () async {
-                    print('click');
-                    // await widget.auth0.loginWithPopup();
-                    // _onAuthenticationChanged(
-                    //     await widget.auth0.isAuthenticated());
+                    await widget.auth0.loginWithPopup();
+                    _onAuthenticationChanged(
+                        await widget.auth0.isAuthenticated());
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white,
@@ -65,16 +64,16 @@ class _LoginState extends State<Login> {
     );
   }
 
-  // void _onAuthenticationChanged(bool isAuthenticated) {
-  //   if (isAuthenticated) {
-  //     widget.auth0.getUser().then(
-  //           (Map<String, dynamic> user) => {
-  //             StoreProvider.of<AppState>(context).dispatch(UpdateUser(user)),
-  //             setState(() {
-  //               Navigator.of(context).pushNamed('/');
-  //             })
-  //           },
-  //         );
-  //   }
-  // }
+  void _onAuthenticationChanged(bool isAuthenticated) {
+    if (isAuthenticated) {
+      widget.auth0.getUser().then(
+            (Map<String, dynamic> user) => {
+              StoreProvider.of<AppState>(context).dispatch(UpdateUser(user)),
+              setState(() {
+                Navigator.of(context).pushNamed('/');
+              })
+            },
+          );
+    }
+  }
 }

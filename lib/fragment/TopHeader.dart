@@ -2,11 +2,25 @@ import 'package:avso_test/redux/app_state.dart';
 import 'package:avso_test/widgets/ResponsiveWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:overlay_container/overlay_container.dart';
 
-class TopHeader extends StatelessWidget {
+class TopHeader extends StatefulWidget {
   const TopHeader({
     Key key,
   }) : super(key: key);
+
+  @override
+  _TopHeaderState createState() => _TopHeaderState();
+}
+
+class _TopHeaderState extends State<TopHeader> {
+  bool _dropdownShown = false;
+
+  void _toggleDropdown() {
+    setState(() {
+      _dropdownShown = !_dropdownShown;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,8 +159,59 @@ class TopHeader extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: AdminButton(
-                          state: state,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: _toggleDropdown,
+                              style: ButtonStyle(
+                                padding:
+                                    MaterialStateProperty.all(EdgeInsets.zero),
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.white),
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.white),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50),
+                                    side: BorderSide(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                              child: AdminRow(),
+                            ),
+                            OverlayContainer(
+                              show: _dropdownShown,
+                              // Let's position this overlay to the right of the button.
+                              position: OverlayContainerPosition(
+                                // Left position.
+                                -40,
+                                // Bottom position.
+                                45,
+                              ),
+                              // The content inside the overlay.
+                              child: Container(
+                                height: 70,
+                                padding: const EdgeInsets.all(20),
+                                margin: const EdgeInsets.only(top: 5),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: <BoxShadow>[
+                                    BoxShadow(
+                                      color: Colors.grey[300],
+                                      blurRadius: 3,
+                                      spreadRadius: 6,
+                                    )
+                                  ],
+                                ),
+                                child: Text(
+                                    "I render outside the \nwidget hierarchy."),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -159,61 +224,8 @@ class TopHeader extends StatelessWidget {
   }
 }
 
-class AdminButton extends StatefulWidget {
-  final state;
-  AdminButton({
-    this.state,
-    Key key,
-  }) : super(key: key);
-
-  @override
-  _AdminButtonState createState() => _AdminButtonState();
-}
-
-class _AdminButtonState extends State<AdminButton> {
-  bool dropdownOpen = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ButtonStyle(
-        padding: MaterialStateProperty.all(EdgeInsets.zero),
-        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-        backgroundColor: MaterialStateProperty.all(Colors.white),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
-            side: BorderSide(color: Colors.white),
-          ),
-        ),
-      ),
-      onPressed: () {
-        setState(() {
-          dropdownOpen = !dropdownOpen;
-        });
-      },
-      child: dropdownOpen
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                AdminRow(state: widget.state),
-                ElevatedButton(
-                  child: Text('logout'),
-                  onPressed: () {
-                    // auth0.logout();
-                  },
-                )
-              ],
-            )
-          : AdminRow(state: widget.state),
-    );
-  }
-}
-
 class AdminRow extends StatelessWidget {
-  final state;
   const AdminRow({
-    this.state,
     Key key,
   }) : super(key: key);
 

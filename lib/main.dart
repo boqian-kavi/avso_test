@@ -57,10 +57,10 @@ void main() async {
 
   setPathUrlStrategy();
 
-  // auth0 = await createAuth0Client(Auth0ClientOptions(
-  //   domain: 'boqian.us.auth0.com',
-  //   client_id: '9qh0pnSL02NWCkjss24GKhnRLrAsnRaW',
-  // ));
+  auth0 = await createAuth0Client(Auth0ClientOptions(
+    domain: 'boqian.us.auth0.com',
+    client_id: '9qh0pnSL02NWCkjss24GKhnRLrAsnRaW',
+  ));
 
   runApp(MyApp(store: _store));
 }
@@ -76,25 +76,25 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool _loggedIn = false;
-  // String _name = "";
+  String _name = "";
 
   @override
   void initState() {
     super.initState();
-    // auth0.isAuthenticated().then(_onAuthenticationChanged);
+    auth0.isAuthenticated().then(_onAuthenticationChanged);
   }
 
-  // void _onAuthenticationChanged(bool isAuthenticated) {
-  //   print(isAuthenticated);
-  //   if (!isAuthenticated) {
-  //     setState(() => _loggedIn = false);
-  //   } else {
-  //     auth0.getUser().then((Map<String, dynamic> user) => setState(() {
-  //           _loggedIn = true;
-  //           _name = user["name"];
-  //         }));
-  //   }
-  // }
+  void _onAuthenticationChanged(bool isAuthenticated) {
+    print(isAuthenticated);
+    if (!isAuthenticated) {
+      setState(() => _loggedIn = false);
+    } else {
+      auth0.getUser().then((Map<String, dynamic> user) => setState(() {
+            _loggedIn = true;
+            _name = user["name"];
+          }));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
