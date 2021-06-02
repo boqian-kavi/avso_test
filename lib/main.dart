@@ -81,20 +81,20 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    auth0.isAuthenticated().then(_onAuthenticationChanged);
+    // auth0.isAuthenticated().then(_onAuthenticationChanged);
   }
 
-  void _onAuthenticationChanged(bool isAuthenticated) {
-    print(isAuthenticated);
-    if (!isAuthenticated) {
-      setState(() => _loggedIn = false);
-    } else {
-      auth0.getUser().then((Map<String, dynamic> user) => setState(() {
-            _loggedIn = true;
-            _name = user["name"];
-          }));
-    }
-  }
+  // void _onAuthenticationChanged(bool isAuthenticated) {
+  //   print(isAuthenticated);
+  //   if (!isAuthenticated) {
+  //     setState(() => _loggedIn = false);
+  //   } else {
+  //     auth0.getUser().then((Map<String, dynamic> user) => setState(() {
+  //           _loggedIn = true;
+  //           _name = user["name"];
+  //         }));
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

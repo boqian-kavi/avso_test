@@ -140,79 +140,136 @@ class _TopHeaderState extends State<TopHeader> {
                           width: ResponsiveWidget.isLargeScreen(context)
                               ? 30
                               : 15),
-                      Container(
-                        height:
-                            ResponsiveWidget.isLargeScreen(context) ? 45 : 40,
-                        padding: EdgeInsets.all(0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                            color: Colors.transparent,
-                          ),
-                          borderRadius: BorderRadius.circular(50),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0xff000000).withOpacity(0.2),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: Offset(0, 4),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              height: ResponsiveWidget.isLargeScreen(context)
+                                  ? 45
+                                  : 40,
+                              child: _dropdownShown
+                                  ? ElevatedButton(
+                                      onPressed: _toggleDropdown,
+                                      style: ButtonStyle(
+                                        padding: MaterialStateProperty.all(
+                                          EdgeInsets.symmetric(
+                                              horizontal: ResponsiveWidget
+                                                      .isLargeScreen(context)
+                                                  ? 15
+                                                  : 15),
+                                        ),
+                                        foregroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.white),
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.white),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(0),
+                                            side:
+                                                BorderSide(color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                      child: AdminRow(),
+                                    )
+                                  : ElevatedButton(
+                                      onPressed: _toggleDropdown,
+                                      style: ButtonStyle(
+                                        padding: MaterialStateProperty.all(
+                                          EdgeInsets.symmetric(
+                                              horizontal: ResponsiveWidget
+                                                      .isLargeScreen(context)
+                                                  ? 15
+                                                  : 15),
+                                        ),
+                                        foregroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.white),
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.white),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            side:
+                                                BorderSide(color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                      child: AdminRow(),
+                                    )),
+                          OverlayContainer(
+                            show: _dropdownShown,
+                            // show: true,
+                            position: OverlayContainerPosition(
+                              0, // Left position.
+                              0, // Bottom position.
                             ),
-                          ],
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: _toggleDropdown,
-                              style: ButtonStyle(
-                                padding:
-                                    MaterialStateProperty.all(EdgeInsets.zero),
-                                foregroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.white),
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.white),
-                                shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50),
-                                    side: BorderSide(color: Colors.white),
+                            child: Container(
+                              height: ResponsiveWidget.isLargeScreen(context)
+                                  ? 45
+                                  : 40,
+                              padding: EdgeInsets.all(0),
+                              margin: EdgeInsets.all(0),
+                              width: ResponsiveWidget.isLargeScreen(context)
+                                  ? 153
+                                  : 136,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  // auth0.logout();
+                                },
+                                style: ButtonStyle(
+                                  padding: MaterialStateProperty.all(
+                                      EdgeInsets.zero),
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.white),
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.white),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(0),
+                                      side: BorderSide(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Logout",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xff716C6C),
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.logout,
+                                        size: ResponsiveWidget.isLargeScreen(
+                                                context)
+                                            ? 26
+                                            : 24,
+                                        color: Color(0xff51595F),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
-                              child: AdminRow(),
                             ),
-                            OverlayContainer(
-                              show: _dropdownShown,
-                              // Let's position this overlay to the right of the button.
-                              position: OverlayContainerPosition(
-                                // Left position.
-                                -40,
-                                // Bottom position.
-                                45,
-                              ),
-                              // The content inside the overlay.
-                              child: Container(
-                                height: 70,
-                                padding: const EdgeInsets.all(20),
-                                margin: const EdgeInsets.only(top: 5),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  boxShadow: <BoxShadow>[
-                                    BoxShadow(
-                                      color: Colors.grey[300],
-                                      blurRadius: 3,
-                                      spreadRadius: 6,
-                                    )
-                                  ],
-                                ),
-                                child: Text(
-                                    "I render outside the \nwidget hierarchy."),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -233,25 +290,29 @@ class AdminRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Container(
-          height: ResponsiveWidget.isLargeScreen(context) ? 40 : 35,
-          width: ResponsiveWidget.isLargeScreen(context) ? 40 : 35,
+          height: ResponsiveWidget.isLargeScreen(context) ? 35 : 32,
+          width: ResponsiveWidget.isLargeScreen(context) ? 35 : 32,
           decoration: BoxDecoration(
             color: Color(0xff127CB6),
             borderRadius: BorderRadius.circular(50),
           ),
           child: Icon(Icons.person,
-              size: ResponsiveWidget.isLargeScreen(context) ? 30 : 28,
+              size: ResponsiveWidget.isLargeScreen(context) ? 26 : 22,
               color: Colors.white),
         ),
         SizedBox(width: ResponsiveWidget.isLargeScreen(context) ? 15 : 10),
-        ConstrainedBox(
-          constraints: BoxConstraints(minWidth: 50),
-          child: Align(
-            alignment: Alignment.center,
+        Align(
+          alignment: Alignment.center,
+          child: Container(
+            width: 45,
             child: Text(
-              'login',
+              'ad',
+              maxLines: 1,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
