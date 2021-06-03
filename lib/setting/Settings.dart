@@ -16,7 +16,6 @@ class _SettingsState extends State<Settings> {
         children: [
           SideBar(),
           Expanded(
-            flex: 1,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
