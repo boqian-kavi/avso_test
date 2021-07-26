@@ -14,11 +14,6 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(

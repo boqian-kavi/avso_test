@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:avso_test/common/user_manager.dart';
 import 'package:avso_test/redux/app_state.dart';
 import 'package:avso_test/widgets/ResponsiveWidget.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +18,19 @@ class TopHeader extends StatefulWidget {
 
 class _TopHeaderState extends State<TopHeader> {
   bool _dropdownShown = false;
+  String _firstName;
 
   void _toggleDropdown() {
     setState(() {
       _dropdownShown = !_dropdownShown;
     });
+  }
+
+  void initState() {
+    _firstName = UserManager.userObjStr.length > 0
+        ? json.decode(UserManager.userObjStr)["given_name"]
+        : 'Admin';
+    super.initState();
   }
 
   @override
@@ -203,11 +214,10 @@ class _TopHeaderState extends State<TopHeader> {
                                           ),
                                         ),
                                       ),
-                                      child: AdminRow(),
+                                      child: AdminRow(name: _firstName),
                                     )),
                           OverlayContainer(
                             show: _dropdownShown,
-                            // show: true,
                             position: OverlayContainerPosition(
                               0, // Left position.
                               0, // Bottom position.
@@ -282,7 +292,9 @@ class _TopHeaderState extends State<TopHeader> {
 }
 
 class AdminRow extends StatelessWidget {
+  final String name;
   const AdminRow({
+    this.name,
     Key key,
   }) : super(key: key);
 
@@ -309,7 +321,7 @@ class AdminRow extends StatelessWidget {
           child: Container(
             width: 45,
             child: Text(
-              'ad',
+              name,
               maxLines: 1,
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,

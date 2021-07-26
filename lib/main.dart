@@ -1,4 +1,6 @@
 import 'package:avso_test/cartracing/CarTracing.dart';
+import 'package:avso_test/common/global.dart';
+import 'package:avso_test/common/user_manager.dart';
 import 'package:avso_test/dashboard/Dashboard.dart';
 import 'package:avso_test/login/Login.dart';
 import 'package:avso_test/model/chart.dart';
@@ -10,9 +12,11 @@ import 'package:avso_test/widgets/auth0_flutter_web/auth0_flutter_web.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:html';
 import 'dart:ui' as ui;
 import 'package:url_strategy/url_strategy.dart';
+import 'dart:convert';
 
 import 'redux/app_state.dart';
 
@@ -76,25 +80,28 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool _loggedIn = false;
-  String _name = "";
 
   @override
   void initState() {
+    auth0.isAuthenticated().then(_onAuthenticationChanged);
+    setupApp();
     super.initState();
-    // auth0.isAuthenticated().then(_onAuthenticationChanged);
   }
 
-  // void _onAuthenticationChanged(bool isAuthenticated) {
-  //   print(isAuthenticated);
-  //   if (!isAuthenticated) {
-  //     setState(() => _loggedIn = false);
-  //   } else {
-  //     auth0.getUser().then((Map<String, dynamic> user) => setState(() {
-  //           _loggedIn = true;
-  //           _name = user["name"];
-  //         }));
-  //   }
-  // }
+  setupApp() async {
+    preferences = await SharedPreferences.getInstance();
+  }
+
+  void _onAuthenticationChanged(bool isAuthenticated) async {
+    if (!isAuthenticated) {
+      setState(() => _loggedIn = false);
+    } else {
+      auth0.getUser().then((Map<String, dynamic> user) => setState(() {
+            _loggedIn = true;
+            UserManager.saveUser(json.encode(user));
+          }));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +114,7 @@ class _MyAppState extends State<MyApp> {
           primarySwatch: Colors.blue,
           backgroundColor: Colors.white,
         ),
-        initialRoute: _loggedIn ? "/" : "/",
+        initialRoute: _loggedIn ? "/" : "/login",
         routes: {
           '/': (context) => Dashboard(),
           '/login': (context) => Login(auth0),

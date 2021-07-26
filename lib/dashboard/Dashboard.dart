@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:avso_test/common/user_manager.dart';
 import 'package:avso_test/dashboard/DashboardCard.dart';
 import 'package:avso_test/fragment/SideBar.dart';
 import 'package:avso_test/fragment/TopHeader.dart';
@@ -11,9 +14,13 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  String _firstName;
   List<Widget> _tiles;
 
   void initState() {
+    _firstName = UserManager.userObjStr.length > 0
+        ? json.decode(UserManager.userObjStr)["given_name"]
+        : 'Admin';
     super.initState();
     _tiles = <Widget>[
       DashboardCard(
@@ -102,7 +109,7 @@ class _DashboardState extends State<Dashboard> {
                   children: [
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('Good Afternoon, Admin',
+                      child: Text('Good Afternoon, ${_firstName}',
                           style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.w500,
