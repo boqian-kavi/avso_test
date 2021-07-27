@@ -187,7 +187,7 @@ class _TopHeaderState extends State<TopHeader> {
                                           ),
                                         ),
                                       ),
-                                      // child: AdminRow(),
+                                      child: AdminRow(name: _firstName),
                                     )
                                   : ElevatedButton(
                                       onPressed: _toggleDropdown,

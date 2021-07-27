@@ -44,7 +44,7 @@ class _DashboardCardState extends State<DashboardCard> {
             ],
           ),
           child: SizedBox(
-            height: 220,
+            height: 200,
             child: Column(
               children: [
                 Row(
@@ -92,7 +92,7 @@ class _DashboardCardState extends State<DashboardCard> {
             ],
           ),
           child: SizedBox(
-            height: 160,
+            height: 200,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

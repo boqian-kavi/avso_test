@@ -58,11 +58,11 @@ class _CarTracingState extends State<CarTracing> {
                                       fontSize: 26,
                                     ),
                                   ),
-                                  SizedBox(height: 10),
-                                  SizedBox(
-                                    height: 450,
-                                    child: GoogleMap(),
-                                  ),
+                                  // SizedBox(height: 10),
+                                  // SizedBox(
+                                  //   height: 450,
+                                  //   child: GoogleMap(),
+                                  // ),
                                   SizedBox(height: 15),
                                   Row(
                                     mainAxisAlignment:
