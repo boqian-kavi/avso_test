@@ -27,9 +27,10 @@ class _TopHeaderState extends State<TopHeader> {
   }
 
   void initState() {
-    _firstName = UserManager.userObjStr.length > 0
-        ? json.decode(UserManager.userObjStr)["given_name"]
-        : 'Admin';
+    // _firstName = UserManager.userObjStr.length > 0
+    //     ? json.decode(UserManager.userObjStr)["given_name"]
+    //     : 'Admin';
+    _firstName = 'Admin';
     super.initState();
   }
 
@@ -186,7 +187,7 @@ class _TopHeaderState extends State<TopHeader> {
                                           ),
                                         ),
                                       ),
-                                      child: AdminRow(),
+                                      // child: AdminRow(),
                                     )
                                   : ElevatedButton(
                                       onPressed: _toggleDropdown,
@@ -214,7 +215,7 @@ class _TopHeaderState extends State<TopHeader> {
                                           ),
                                         ),
                                       ),
-                                      child: AdminRow(name: _firstName),
+                                      child: AdminRow(name: "admin"),
                                     )),
                           OverlayContainer(
                             show: _dropdownShown,

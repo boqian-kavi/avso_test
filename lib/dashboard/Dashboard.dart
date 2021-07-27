@@ -18,9 +18,10 @@ class _DashboardState extends State<Dashboard> {
   List<Widget> _tiles;
 
   void initState() {
-    _firstName = UserManager.userObjStr.length > 0
-        ? json.decode(UserManager.userObjStr)["given_name"]
-        : 'Admin';
+    // _firstName = UserManager.userObjStr.length > 0
+    //     ? json.decode(UserManager.userObjStr)["given_name"]
+    //     : 'Admin';
+    _firstName = "Admin";
     super.initState();
     _tiles = <Widget>[
       DashboardCard(

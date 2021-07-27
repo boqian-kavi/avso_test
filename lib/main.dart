@@ -114,7 +114,8 @@ class _MyAppState extends State<MyApp> {
           primarySwatch: Colors.blue,
           backgroundColor: Colors.white,
         ),
-        initialRoute: _loggedIn ? "/" : "/login",
+        // initialRoute: _loggedIn ? "/" : "/login",
+        initialRoute: "/",
         routes: {
           '/': (context) => Dashboard(),
           '/login': (context) => Login(auth0),

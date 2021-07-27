@@ -21,10 +21,14 @@ class UserManager {
 
   void _saveUser(String userObjStr) async {
     _userObjStr = userObjStr;
-    preferences.setString('userObjStr', userObjStr);
+    if (userObjStr != null) {
+      preferences.setString('userObjStr', userObjStr);
+    }
   }
 
   loadUserFromLocal() {
-    _userObjStr = preferences.getString('userObjStr');
+    if (userObjStr != null) {
+      _userObjStr = preferences.getString('userObjStr');
+    }
   }
 }
